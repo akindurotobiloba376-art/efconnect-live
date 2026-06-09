@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eFCONNECT Global</title>
+    <style>
+        :root { --bl:#002395; --bg:#0b111e; --pn:#16223f; --in:#1f305a; --lt:#fff; --mt:#8fa0cd; --gr:#28a745; --rd:#dc3545; --gd:#ffc107; --bd:rgba(255,255,255,0.1); }
+        * { box-sizing:border-box; margin:0; padding:0; font-family:sans-serif; }
+        body { background:var(--bg); color:var(--lt); padding-bottom:70px; }
+        header, .row { display:flex; justify-content:space-between; align-items:center; }
+        header { background:var(--bl); padding:12px; }
+        .lk-btn { background:rgba(255,255,255,0.15); padding:5px 10px; border-radius:15px; font-size:12px; font-weight:bold; border:1px solid rgba(255,255,255,0.25); color:#fff; }
+        .ctr { max-width:500px; margin:0 auto; padding:12px; }
+        .cd { background:var(--pn); border-radius:6px; padding:12px; margin-bottom:12px; border:1px solid var(--bd); }
+        h2 { font-size:14px; margin-bottom:10px; color:var(--gd); text-transform:uppercase; }
+        .ig { display:flex; gap:6px; margin-bottom:10px; }
+        input, select { background:var(--in); border:1px solid var(--bd); color:#fff; padding:8px; border-radius:4px; outline:none; font-size:14px; }
+        input[type="text"], select { flex:1; }
+        button { background:var(--bl); color:#fff; border:none; padding:8px 12px; border-radius:4px; font-weight:bold; cursor:pointer; }
+        .b-sc { background:var(--gr); } .b-rd { background:var(--rd); } .b-bk { width:100%; display:block; margin-top:8px; padding:10px; }
+        .tab { display:none; } .tab.active { display:block; }
+        .item { background:rgba(255,255,255,0.05); padding:8px; margin-bottom:5px; border-radius:4px; display:flex; justify-content:space-between; font-size:13px; }
+        .m-cd { background:rgba(0,0,0,0.2); border-radius:6px; padding:10px; margin-bottom:8px; border:1px solid var(--bd); }
+        .m-rw { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+        .box { width:35px; text-align:center; }
+        table { width:100%; border-collapse:collapse; font-size:12px; margin-bottom:12px; }
+        th, td { padding:6px 2px; text-align:center; border-bottom:1px solid var(--bd); }
+        th { color:var(--mt); } td.lf { text-align:left; font-weight:bold; }
+        .dot { display:inline-block; width:12px; height:12px; border-radius:50%; font-size:10px; line-height:12px; text-align:center; font-weight:bold; color:#fff; margin-right:2px; }
+        .f-w { background:var(--gr); } .f-d { background:var(--mt); color:#000; } .f-l { background:var(--rd); }
+        nav { position:fixed; bottom:0; left:0; right:0; background:var(--pn); display:flex; border-top:1px solid var(--bd); }
+        .n-btn { flex:1; text-align:center; padding:12px 0; color:var(--mt); font-size:13px; cursor:pointer; }
+        .n-btn.active { color:#fff; background:rgba(255,255,255,0.05); border-top:3px solid var(--gd); }
+        .ad { display:none !important; } body.admin-mode .ad { display:block !important; }
+        body.admin-mode span.ad, body.admin-mode button.ad { display:inline-block !important; }
+    </style>
+    <script src="https://js.puter.com/v2/"></script>
+</head>
+<body>
+    <header><h3>eFCONNECT Live</h3><button class="lk-btn" id="lk" onclick="tkLk()">🔒 Player</button></header>
+    <div class="ctr">
+        <div id="t-t" class="tab active"><div class="cd"><h2>Teams</h2><div class="ig ad"><input type="text" id="ti" placeholder="Name..."><button onclick="addT()">+ Add</button></div><div id="tl"></div><div class="ad" style="margin-top:10px; border-top:1px solid var(--bd); padding-top:10px;"><select id="ts" style="width:100%;"><option value="league">League</option><option value="groups">Groups (4/Gp)</option></select></div><button class="b-sc b-bk ad" onclick="gnFx()">⚡ Generate Schedule</button><button class="b-rd b-bk ad" onclick="clFx()">🗑️ Clear Schedule</button><p id="pn" style="text-align:center; color:var(--mt); font-size:12px; padding-top:10px;">Locked. Tap Player Mode to edit.</p></div></div>
+        <div id="t-f" class="tab"><div class="cd"><h2>Fixtures</h2><button style="width:100%; margin-bottom:10px;" onclick="shFx()">📋 Copy</button><div id="fl"></div></div></div>
+        <div id="t-s" class="tab"><div class="cd"><div class="row"><h2>Standings</h2><button onclick="shSt()">📋 Copy</button></div><div id="tw"></div></div></div>
+        <div id="t-b" class="tab"><div class="cd ad"><h2>Playoffs</h2><select id="bz" style="width:100%; margin-bottom:5px;"><option value="32">Top 32</option><option value="16">Top 16</option><option value="8">Top 8</option><option value="4">Top 4</option><option value="2">Top 2</option></select><button class="b-sc b-bk" onclick="gnBk()">🏆 Build Bracket</button><button class="b-rd b-bk" onclick="clBk()">🗑️ Clear</button></div><div class="cd"><h2>Tree</h2><div id="bb"></div></div></div>
+    </div>
+    <nav><div class="n-btn active" id="b-t" onclick="swTb('t')">Teams</div><div class="n-btn" id="b-f" onclick="swTb('f')">Fixtures</div><div class="n-btn" id="b-s" onclick="swTb('s')">Standings</div><div class="n-btn" id="b-b" onclick="swTb('b')">Brackets</div></nav>
+    <script>
+        let db = { teams: [], matches: [], bracket: [], mode: "league" }, ad = false;
+        const $ = id => document.getElementById(id);
+
+        puter.ready().then(async () => {
+            await syncFromCloud();
+            setInterval(syncFromCloud, 3000);
+        });
+
+        async function syncFromCloud() {
+            try {
+                if (document.activeElement && document.activeElement.tagName === 'INPUT') return;
+                let cloudData = await puter.kv.getJSON('efconnect_hub_data_2026');
+                if (cloudData) {
+                    db = Object.assign({ teams: [], matches: [], bracket: [], mode: "league" }, cloudData);
+                    upT(); upF(); calS(); upB();
+                }
+            } catch(e) { console.log("Cloud sync delayed..."); }
+        }
+
+        async function sv() {
+            try {
+                await puter.kv.setJSON('efconnect_hub_data_2026', db);
+                upT(); upF(); calS(); upB();
+            } catch(e) { alert("Cloud saving failed. Check your data connection."); }
+        }
+
+        function tkLk() {
+            if (!ad) { if (prompt("Passkey:") === "efconnect2026") { ad = true; document.body.classList.add('admin-mode'); $('lk').textContent = "🔓 Admin"; $('lk').style.background = "var(--gr)"; if($('pn')) $('pn').style.display = "none"; } else alert("Wrong."); }
+            else { ad = false; document.body.classList.remove('admin-mode'); $('lk').textContent = "🔒 Player"; $('lk').style.background = "rgba(255,255,255,0.15)"; if($('pn')) $('pn').style.display = "block"; }
+            upT(); upF(); upB();
+        }
+        function swTb(t) { document.querySelectorAll('.tab, .n-btn').forEach(e => e.classList.remove('active')); $('t-'+t).classList.add('active'); $('b-'+t).classList.add('active'); if(t==='s') calS(); if(t==='b') upB(); }
+        function addT() { let n = $('ti').value.trim(); if(!n || db.teams.includes(n)) return; if(!db.teams) db.teams=[]; db.teams.push(n); $('ti').value = ''; sv(); }
+        function rmT(i) { if(ad) { db.teams.splice(i,1); sv(); } }
+        function clFx() { if(confirm("Reset schedule?")) { db.matches = []; db.bracket = []; sv(); } }
+        function upT() { $('tl').innerHTML = (db.teams && db.teams.length) ? '' : '<p style="color:var(--mt); font-size:12px;">Empty</p>'; if(db.teams) db.teams.forEach((t, i) => $('tl').innerHTML += `<div class="item"><span>👤 ${t}</span>${ad ? `<span style="color:var(--rd); cursor:pointer;" onclick="rmT(${i})">×</span>`:''}</div>`); }
+        function gnFx() { if(!db.teams || db.teams.length < 2) return alert("Need 2+ players."); if(db.matches && db.matches.length && !confirm("Erase data?")) return; db.mode = $('ts').value; db.matches = []; db.bracket = []; if(db.mode === "league") buildR(db.teams, null); else { let p = [...db.teams].sort(() => Math.random()-0.5), abc = "ABCDEFGH"; for(let i=0; i<Math.ceil(p.length/4); i++) buildR(p.slice(i*4, (i*4)+4), abc[i]||`G-${i+1}`); } sv(); swTb('f'); }
+        function buildR(tms, tg) { let l = [...tms]; if(l.length % 2) l.push("BYE"); let rds = l.length-1, mPR = l.length/2, sid = (db.matches||[]).length+1; for(let r=0; r<rds; r++) { for(let m=0; m<mPR; m++) { let h = (r+m)%(l.length-1), a = (l.length-1-m+r)%(l.length-1); if(m===0) a=l.length-1; if(l[h]!=="BYE" && l[a]!=="BYE") db.matches.push({ id: sid++, group: tg, round: r+1, home: l[h], away: l[a], homeScore:'', awayScore:'', status:'⏳ Upcoming' }); } } }
+        function upF() {
+            $('fl').innerHTML = (db.matches && db.matches.length) ? '' : '<p style="color:var(--mt); font-size:12px;">No matches.</p>'; let cG = "__init__", cR = 0;
+            if(db.matches) db.matches.forEach(m => {
+                if(m.group !== cG) { cG = m.group; cR = 0; if(m.group) $('fl').innerHTML += `<div style="font-weight:bold; margin:15px 0 5px; font-size:14px; border-bottom:2px solid var(--bl)">🏆 GROUP ${m.group}</div>`; }
+                if(m.round !== cR) { cR = m.round; $('fl').innerHTML += `<div style="font-weight:bold; margin:10px 0 5px; font-size:12px; color:var(--gd);">ROUND ${cR}</div>`; }
+                $('fl').innerHTML += `<div class="m-cd"><div class="m-rw" style="font-size:11px; color
+                $('fl').innerHTML += `<div class="m-cd"><div class="m-rw" style="font-size:11px; color:var(--mt);"><span>#${m.id}</span>${ad ? `<select onchange="sV(${m.id},this.value)"><option ${m.status==='⏳ Upcoming'?'selected':''}>⏳ Upcoming</option><option ${m.status==='🔴 LIVE'?'selected':''}>🔴 LIVE</option><option ${m.status==='✅ FT'?'selected':''}>✅ FT</option></select>` : `<span>${m.status}</span>`}</div><div class="m-rw"><span style="flex:1; text-align:right; margin-right:8px; font-weight:bold;">${m.home}</span>${ad ? `<input type="number" class="box" value="${m.homeScore}" oninput="sC(${m.id},'home',this.value)"> - <input type="number" class="box" value="${m.awayScore}" oninput="sC(${m.id},'away',this.value)">` : `<span>${m.homeScore!==''?m.homeScore:'-'}</span> - <span>${m.awayScore!==''?m.awayScore:'-'}</span>`}<span style="flex:1; text-align:left; margin-left:8px; font-weight:bold;">${m.away}</span></div></div>`;
+            });
+        }
+        const sC = (id, s, v) => { let m = db.matches.find(x => x.id === id); if(m) { m[s+'Score'] = v===''? '':parseInt(v,10); sv(); } };
+        const sV = (id, v) => { let m = db.matches.find(x => x.id === id); if(m) { m.status = v; sv(); } };
+        function calS() {
+            $('tw').innerHTML = ''; if(!db.teams) return; let rec = {}; db.teams.forEach(t => rec[t] = { name: t, p:0, w:0, d:0, l:0, gf:0, ga:0, gd:0, pts:0, form:[], group:null });
+            if(db.matches) db.matches.forEach(m => { if(m.group) { if(rec[m.home]) rec[m.home].group = m.group; if(rec[m.away]) rec[m.away].group = m.group; } if(m.homeScore !== '' && m.awayScore !== '') { let h=rec[m.home], a=rec[m.away], hS=m.homeScore, aS=m.awayScore; if(h && a) { h.p++; a.p++; h.gf+=hS; h.ga+=aS; a.gf+=aS; a.ga+=hS; if(hS>aS) { h.w++; h.pts+=3; h.form.push('W'); a.l++; a.form.push('L'); } else if(hS<aS) { a.w++; a.pts+=3; a.form.push('W'); h.l++; h.form.push('L'); } else { h.d++; h.pts+=1; h.form.push('D'); a.d++; a.pts+=1; a.form.push('D'); } h.gd=h.gf-h.ga; a.gd=a.gf-a.ga; } } });
+            const srt = (x,y) => y.pts - x.pts || y.gd - x.gd || y.gf - x.gf;
+            if(db.mode === "league") $('tw').appendChild(mkT("League Table", Object.values(rec).sort(srt)));
+            else { let gps = {}; Object.values(rec).forEach(r => { let g = r.group||"A"; if(!gps[g]) gps[g]=[]; gps[g].push(r); }); Object.keys(gps).sort().forEach(g => $('tw').appendChild(mkT(`Group ${g}`, gps[g].sort(srt)))); }
+        }
+        function mkT(ttl, dt) {
+            let d = document.createElement('div'); d.innerHTML = `<h4 style="margin-bottom:4px;">${ttl}</h4>`; let t = document.createElement('table');
+            t.innerHTML = `<thead><tr><th>Pos</th><th class="lf">Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th><th>Form</th></tr></thead><tbody></tbody>`;
+            let tb = t.querySelector('tbody'); if(!dt.length) tb.innerHTML = '<tr><td colspan="9">Empty</td></tr>';
+            dt.forEach((x, i) => { let dots = ''; x.form.slice(-5).forEach(c => dots += `<span class="dot f-${c.toLowerCase()}">${c}</span>`); tb.innerHTML += `<tr><td>${i+1}</td><td class="lf">${x.name}</td><td>${x.p}</td><td>${x.w}</td><td>${x.d}</td><td>${x.l}</td><td>${x.gd>0?'+'+x.gd:x.gd}</td><td style="color:var(--gd); font-weight:bold;">${x.pts}</td><td>${dots||'-'}</td></tr>`; });
+            d.appendChild(t); return d;
+        }
+        function getRk() {
+            if(!db.teams) return []; let r = {}; db.teams.forEach(t => r[t] = { name: t, p:0, w:0, d:0, l:0, gf:0, ga:0, gd:0, pts:0, group:null });
+            if(db.matches) db.matches.forEach(m => { if(m.group) { if(r[m.home]) r[m.home].group = m.group; if(r[m.away]) r[m.away].group = m.group; } if(m.homeScore!=='' && m.awayScore!=='') { let h=r[m.home], a=r[m.away], hS=m.homeScore, aS=m.awayScore; if(h && a) { h.p++; a.p++; h.gf+=hS; h.ga+=aS; a.gf+=aS; a.ga+=hS; if(hS>aS) h.w++; else if(hS<aS) a.w++; else { h.d++; a.d++; } r[m.home].pts = h.w*3 + h.d; r[m.away].pts = a.w*3 + a.d; h.gd=h.gf-h.ga; a.gd=a.gf-a.ga; } } });
+            const s = (x,y) => y.pts-x.pts || y.gd-x.gd || y.gf-x.gf; if(db.mode === "league") return Object.values(r).sort(s).map(x => x.name);
+            let gps = {}, w = [], rn = []; Object.values(r).forEach(x => { let g = x.group||"A"; if(!gps[g]) gps[g]=[]; gps[g].push(x); });
+            Object.keys(gps).sort().forEach(g => { let sd = gps[g].sort(s); if(sd[0]) w.push(sd[0].name); if(sd[1]) rn.push(sd[1].name); });
+            let cb = []; for(let i=0; i<w.length; i++) { cb.push(w[i]); if(rn[i]) cb.push(rn[i]); } return cb;
+        }
+        function gnBk() {
+            let sz = parseInt($('bz').value, 10), rk = getRk(); if(rk.length < 2) return alert("Need 2+ players.");
+            let pl = []; for(let i=0; i<sz; i++) pl.push(rk[i] || `TBD #${i+1}`); db.bracket = []; let cid = 1, lb = gLb(sz), hf = sz / 2;
+            if(db.mode === "groups" && sz === 8) { [[pl[0],pl[3]], [pl[2],pl[1]], [pl[4],pl[7]], [pl[6],pl[5]]].forEach(p => { db.bracket.push({ id: cid++, roundTag: lb, home: p[0], away: p[1], homeScore:'', awayScore:'', nextId: null }); }); } 
+            else { for(let i=0; i<hf; i++) db.bracket.push({ id: cid++, roundTag: lb, home: pl[i], away: pl[sz-1-i], homeScore:'', awayScore:'', nextId: null }); }
+            let lIdx = 0, tk = hf;
+            while(tk >= 2) {
+                lb = gLb(tk); let nH = tk/2, aSt = db.bracket.length;
+                for(let i=0; i<nH; i++) db.bracket.push({ id: cid++, roundTag: lb, home: `Winner Match #${db.bracket[lIdx+(i*2)].id}`, away: `Winner Match #${db.bracket[lIdx+(i*2)+1].id}`, homeScore:'', awayScore:'', nextId: null });
+                for(let i=0; i<tk; i++) db.bracket[lIdx+i].nextId = db.bracket[aSt+Math.floor(i/2)].id;
+                lIdx = aSt; tk = nH;
+            }
+            sv(); alert("Built!");
+        }
+        function gLb(v) { return v===32?"Round of 32":v===16?"Round of 16":v===8?"Quarter-Finals":v===4?"Semi-Finals":"Finals"; }
+        function clBk() { if(confirm("Clear?")) { db.bracket = []; sv(); } }
+        function upB() {
+            $('bb').innerHTML = (db.bracket && db.bracket.length) ? '' : '<p style="color:var(--mt); font-size:12px;">Empty</p>'; let sd = {}; if(db.bracket) db.bracket.forEach(m => { if(!sd[m.roundTag]) sd[m.roundTag] = []; sd[m.roundTag].push(m); });
+            ["Round of 32", "Round of 16", "Quarter-Finals", "Semi-Finals", "Finals"].forEach(lb => {
+                if(sd[lb]) {
+                    $('bb').innerHTML += `<div style="font-weight:bold; margin:10px 0 5px; font-size:12px; color:var(--gd); text-transform:uppercase;">${lb}</div>`;
+                    sd[lb].forEach(m => {
+                        $('bb').innerHTML += `<div class="m-cd"><div style="font-size:11px; color:var(--mt); display:flex; justify-content:space-between;"><span>#${m.id}</span>${ad ? `<button class="b-sc" style="padding:1px 4px; font-size:10px;" onclick="adB(${m.id})">Promote ➡️</button>`:''}</div><div class="m-rw"><span style="flex:1; text-align:right; margin-right:8px; font-weight:bold;">${m.home}</span>${ad ? `<input type="number" class="box" value="${m.homeScore}" oninput="svBS(${m.id},'home',this.value)"> - <input type="number" class="box" value="${m.awayScore}" oninput="svBS(${m.id},'away',this.value)">` : `<span>${m.homeScore!==''?m.homeScore:'-'}</span> - <span>${m.awayScore!==''?m.awayScore:'-'}</span>`} <span style="flex:1; text-align:left; margin-left:8px; font-weight:bold;">${m.away}</span></div></div>`;
+                    });
+                }
+            });
+        }
+        function shSt() { 
+            let tx = "*🏆 STANDINGS*\n\n"; 
+            document.querySelectorAll("#tw table").forEach(t => { 
+                if(t.previousElementSibling) tx += `*${t.previousElementSibling.innerText.toUpperCase()}*\n`; 
+                t.querySelectorAll("tbody tr").forEach(r => { 
+                    let c = r.querySelectorAll("td"); 
+                    if(c.length>=8) tx += `${c[0].innerText}. *${c[1].innerText}* - P:${c[2].innerText} | GD:${c[6].innerText} | *${c[7].innerText} Pts*\n`; 
+                }); 
+                tx += `\n`; 
+            }); 
+            navigator.clipboard.writeText(tx); 
+            alert("Copied!"); 
+        }
+        function shFx() { 
+            let tx = "*⚽ FIXTURES*\n\n", cG = "__init__", cR = 0; 
+            if(db.matches) db.matches.forEach(m => { 
+                if(m.group !== cG) { cG = m.group; tx += `\n*🏆 GROUP ${cG}*\n`; } 
+                if(m.round !== cR) { cR = m.round; tx += `\n*ROUND ${cR}*\n`; } 
+                tx += m.homeScore!=='' && m.awayScore!=='' ? `✅ ${m.home} ${m.homeScore} - ${m.awayScore} ${m.away}\n` : `⏳ ${m.home} vs ${m.away}\n`; 
+            }); 
+            navigator.clipboard.writeText(tx); 
+            alert("Copied!");
+        }
+        const svBS = (id, s, v) => { 
+            let m = db.bracket.find(x => x.id === id); 
+            if(m) { 
+                m[s+'Score'] = v===''? '':parseInt(v,10); 
+                sv(); 
+                upB(); 
+            } 
+        };
+        function adB(id) {
+            let m = db.bracket.find(x => x.id === id); 
+            if(!m || m.homeScore==='' || m.awayScore==='') return alert("Enter scores.");
+            let h = parseInt(m.homeScore,10), a = parseInt(m.awayScore,10), w = h>a?m.home:m.away;
+            if(h === a) { 
+                w = prompt(`Enter winner:\n1. ${m.home}\n2. ${m.away}`); 
+                if(w!==m.home && w!==m.away) return alert("Error."); 
+            }
+            if(!m.nextId) return alert(`🏆 ${w} wins!`);
+            let t = db.bracket.find(x => x.id === m.nextId); 
+            if(t) { 
+                if(id % 2 !== 0) t.home = w; else t.away = w; 
+                sv(); 
+                upB(); 
+                alert("Promoted!"); 
+            }
+        }
+    </script>
+</body>
+</html>
