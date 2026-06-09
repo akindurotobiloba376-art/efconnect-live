@@ -10,288 +10,35 @@
     "IamFREZZY246"
   ],
   "matches": [
-    {
-      "id": 1,
-      "group": null,
-      "round": 1,
-      "home": "Teeklassik",
-      "away": "IamFREZZY246",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 2,
-      "group": null,
-      "round": 1,
-      "home": "Elmuheeziy",
-      "away": "Izzy005",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 3,
-      "group": null,
-      "round": 1,
-      "home": "Nightmagic",
-      "away": "Chuksfc_fK",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 4,
-      "group": null,
-      "round": 1,
-      "home": "CM_ICONIC_9",
-      "away": "La_Joya_001",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 5,
-      "group": null,
-      "round": 2,
-      "home": "Elmuheeziy",
-      "away": "IamFREZZY246",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 6,
-      "group": null,
-      "round": 2,
-      "home": "Nightmagic",
-      "away": "Teeklassik",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 7,
-      "group": null,
-      "round": 2,
-      "home": "CM_ICONIC_9",
-      "away": "Izzy005",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 8,
-      "group": null,
-      "round": 2,
-      "home": "La_Joya_001",
-      "away": "Chuksfc_fK",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 9,
-      "group": null,
-      "round": 3,
-      "home": "Nightmagic",
-      "away": "IamFREZZY246",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 10,
-      "group": null,
-      "round": 3,
-      "home": "CM_ICONIC_9",
-      "away": "Elmuheeziy",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 11,
-      "group": null,
-      "round": 3,
-      "home": "La_Joya_001",
-      "away": "Teeklassik",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 12,
-      "group": null,
-      "round": 3,
-      "home": "Chuksfc_fK",
-      "away": "Izzy005",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 13,
-      "group": null,
-      "round": 4,
-      "home": "CM_ICONIC_9",
-      "away": "IamFREZZY246",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 14,
-      "group": null,
-      "round": 4,
-      "home": "La_Joya_001",
-      "away": "Nightmagic",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 15,
-      "group": null,
-      "round": 4,
-      "home": "Chuksfc_fK",
-      "away": "Elmuheeziy",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 16,
-      "group": null,
-      "round": 4,
-      "home": "Izzy005",
-      "away": "Teeklassik",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 17,
-      "group": null,
-      "round": 5,
-      "home": "La_Joya_001",
-      "away": "IamFREZZY246",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 18,
-      "group": null,
-      "round": 5,
-      "home": "Chuksfc_fK",
-      "away": "CM_ICONIC_9",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 19,
-      "group": null,
-      "round": 5,
-      "home": "Izzy005",
-      "away": "Nightmagic",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 20,
-      "group": null,
-      "round": 5,
-      "home": "Teeklassik",
-      "away": "Elmuheeziy",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 21,
-      "group": null,
-      "round": 6,
-      "home": "Chuksfc_fK",
-      "away": "IamFREZZY246",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 22,
-      "group": null,
-      "round": 6,
-      "home": "Izzy005",
-      "away": "La_Joya_001",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 23,
-      "group": null,
-      "round": 6,
-      "home": "Teeklassik",
-      "away": "CM_ICONIC_9",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 24,
-      "group": null,
-      "round": 6,
-      "home": "Elmuheeziy",
-      "away": "Nightmagic",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 25,
-      "group": null,
-      "round": 7,
-      "home": "Izzy005",
-      "away": "IamFREZZY246",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 26,
-      "group": null,
-      "round": 7,
-      "home": "Teeklassik",
-      "away": "Chuksfc_fK",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 27,
-      "group": null,
-      "round": 7,
-      "home": "Elmuheeziy",
-      "away": "La_Joya_001",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    },
-    {
-      "id": 28,
-      "group": null,
-      "round": 7,
-      "home": "Nightmagic",
-      "away": "CM_ICONIC_9",
-      "homeScore": "",
-      "awayScore": "",
-      "status": "⏳ Upcoming"
-    }
+    {"id": 1, "group": null, "round": 1, "home": "Teeklassik", "away": "IamFREZZY246", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 2, "group": null, "round": 1, "home": "Elmuheeziy", "away": "Izzy005", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 3, "group": null, "round": 1, "home": "Nightmagic", "away": "Chuksfc_fK", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 4, "group": null, "round": 1, "home": "CM_ICONIC_9", "away": "La_Joya_001", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 5, "group": null, "round": 2, "home": "Elmuheeziy", "away": "IamFREZZY246", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 6, "group": null, "round": 2, "home": "Nightmagic", "away": "Teeklassik", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 7, "group": null, "round": 2, "home": "CM_ICONIC_9", "away": "Izzy005", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 8, "group": null, "round": 2, "home": "La_Joya_001", "away": "Chuksfc_fK", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 9, "group": null, "round": 3, "home": "Nightmagic", "away": "IamFREZZY246", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 10, "group": null, "round": 3, "home": "CM_ICONIC_9", "away": "Elmuheeziy", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 11, "group": null, "round": 3, "home": "La_Joya_001", "away": "Teeklassik", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 12, "group": null, "round": 3, "home": "Chuksfc_fK", "away": "Izzy005", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 13, "group": null, "round": 4, "home": "CM_ICONIC_9", "away": "IamFREZZY246", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 14, "group": null, "round": 4, "home": "La_Joya_001", "away": "Nightmagic", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 15, "group": null, "round": 4, "home": "Chuksfc_fK", "away": "Elmuheeziy", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 16, "group": null, "round": 4, "home": "Izzy005", "away": "Teeklassik", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 17, "group": null, "round": 5, "home": "La_Joya_001", "away": "IamFREZZY246", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 18, "group": null, "round": 5, "home": "Chuksfc_fK", "away": "CM_ICONIC_9", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 19, "group": null, "round": 5, "home": "Izzy005", "away": "Nightmagic", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 20, "group": null, "round": 5, "home": "Teeklassik", "away": "Elmuheeziy", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 21, "group": null, "round": 6, "home": "Chuksfc_fK", "away": "IamFREZZY246", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 22, "group": null, "round": 6, "home": "Izzy005", "away": "La_Joya_001", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 23, "group": null, "round": 6, "home": "Teeklassik", "away": "CM_ICONIC_9", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 24, "group": null, "round": 6, "home": "Elmuheeziy", "away": "Nightmagic", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 25, "group": null, "round": 7, "home": "Izzy005", "away": "IamFREZZY246", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 26, "group": null, "round": 7, "home": "Teeklassik", "away": "Chuksfc_fK", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 27, "group": null, "round": 7, "home": "Elmuheeziy", "away": "La_Joya_001", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"},
+    {"id": 28, "group": null, "round": 7, "home": "Nightmagic", "away": "CM_ICONIC_9", "homeScore": "", "awayScore": "", "status": "⏳ Upcoming"}
   ],
   "bracket": [],
   "mode": "league"
 }
-
